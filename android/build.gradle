@@ -1,0 +1,32 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral() 
+        
+    }
+  dependencies {
+    // ... other dependencies
+ classpath 'com.google.gms:google-services:4.3.8' 
+
+
+// 'com.google.gms:google-services:4.3.8' -- Refal
+  }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.buildDir = "../build"
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+
+    project.evaluationDependsOn(":app")
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
